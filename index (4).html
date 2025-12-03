@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>bigbaktiers</title>
+<style>
+  :root{
+    --bg:#0b1116; --muted:#97a3b3; --accent:#6df0ff;
+    --tier1:#b8860b; --tier2:#4b5563; --tier3:#6b3f26; --tier4:#23303a; --tier5:#2b3440;
+    font-family: Inter, system-ui, -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  }
+  body{ margin:0; background:var(--bg); color:#e6eef7; }
+
+  header{
+    padding:18px 26px;
+    background:linear-gradient(180deg,#0e141a,#0b0f14);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .brand{ color:var(--accent);font-weight:800;font-size:20px; }
+
+  /* Tabs */
+  .tabs{
+    display:flex;gap:12px;padding:18px 24px 0 24px;overflow-x:auto;
+  }
+  .tab{
+    padding:10px 14px;
+    background:#101823;
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:12px 12px 0 0;
+    cursor:pointer;
+    color:var(--muted);
+    font-weight:600;
+  }
+  .tab.active{
+    color:#fff;
+    border-bottom:3px solid var(--accent);
+    box-shadow:0 7px 18px rgba(0,0,0,0.5);
+  }
+
+  .view{ padding:20px 26px; }
+
+  /* Tier board */
+  .tier-board{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:14px;
+  }
+  .tier{
+    border:1px solid rgba(255,255,255,0.04);
+    border-radius:12px;
+    overflow:hidden;
+    background:rgba(255,255,255,0.015);
+  }
+  .tier-header{ padding:12px;font-weight:700;color:#fff; }
+  .tier-body{ padding:10px; }
+
+  .t1 .tier-header{ background:linear-gradient(90deg,var(--tier1),#bd922d); }
+  .t2 .tier-header{ background:linear-gradient(90deg,var(--tier2),#5d6978); }
+  .t3 .tier-header{ background:linear-gradient(90deg,var(--tier3),#8d5d3f); }
+  .t4 .tier-header{ background:linear-gradient(90deg,var(--tier4),#313e47); }
+  .t5 .tier-header{ background:linear-gradient(90deg,var(--tier5),#2f3942); }
+
+  .player{
+    display:flex;align-items:center;gap:10px;
+    padding:8px;border-radius:8px;
+  }
+  .player:hover{ background:rgba(255,255,255,0.04); }
+
+  .avatar{
+    width:34px;
+    height:34px;
+    border-radius:6px;
+    background-size:cover;
+    background-position:center;
+    background-color:transparent;
+    border:none;
+  }
+
+  .pname{ font-weight:600; }
+  .ppoints{ color:var(--muted);margin-left:auto; }
+
+  .no-data{
+    border:1px dashed rgba(255,255,255,0.08);
+    padding:40px;
+    text-align:center;
+    font-size:15px;
+    color:var(--muted);
+    border-radius:12px;
+    background:rgba(255,255,255,0.02);
+  }
+
+  @media(max-width:900px){
+    .tier-board{ grid-template-columns:1fr 1fr; }
+  }
+  @media(max-width:600px){
+    .tier-board{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">bigbaktiers</div>
+</header>
+
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tab active" data-view="overall">🏆 Overall</div>
+  <div class="tab" data-view="endurance">🍽️ Endurance Eating</div>
+  <div class="tab" data-view="speed">⚡ Speed Eating</div>
+  <div class="tab" data-view="generosity">💖 Generosity</div>
+</div>
+
+<!-- OVERALL -->
+<div id="overall" class="view">
+  <h2>Overall Rankings</h2>
+
+  <!-- 1 — glon -->
+  <div class="player" style="background:rgba(255,215,0,0.08);border-left:4px solid #ffd54a;">
+    <div class="avatar" style="background-image:url('glenn.jpg');"></div>
+    <div class="pname">glon</div>
+    <div class="ppoints">405 pts</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="player">
+    <div class="avatar" style="background-image:url('atche.png');"></div>
+    <div class="pname">Atche</div>
+    <div class="ppoints">330 pts</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="player">
+    <div class="avatar" style="background-image:url('seb.png');"></div>
+    <div class="pname">Seb</div>
+    <div class="ppoints">290 pts</div>
+  </div>
+
+  <!-- NEW PLAYERS BELOW -->
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('lucas.png');"></div>
+    <div class="pname">Lucas</div>
+    <div class="ppoints">HT3</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('sydus.png');"></div>
+    <div class="pname">Sydus</div>
+    <div class="ppoints">LT3</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('prety.png');"></div>
+    <div class="pname">Prety</div>
+    <div class="ppoints">LT3</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('tanni.png');"></div>
+    <div class="pname">Tanni</div>
+    <div class="ppoints">HT4</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('abir.png');"></div>
+    <div class="pname">Abir</div>
+    <div class="ppoints">LT4</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('samuel.png');"></div>
+    <div class="pname">Samuel</div>
+    <div class="ppoints">LT4</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('leon.png');"></div>
+    <div class="pname">Leon</div>
+    <div class="ppoints">HT4</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('jericho.png');"></div>
+    <div class="pname">Jericho</div>
+    <div class="ppoints">HT4</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('aaron.png');"></div>
+    <div class="pname">Aaron</div>
+    <div class="ppoints">HT5</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('hanming.png');"></div>
+    <div class="pname">Hanming</div>
+    <div class="ppoints">HT5</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('colin.png');"></div>
+    <div class="pname">Colin</div>
+    <div class="ppoints">HT5</div>
+  </div>
+
+  <div class="player">
+    <div class="avatar" style="background-image:url('zidan.png');"></div>
+    <div class="pname">Zidan</div>
+    <div class="ppoints">HT3</div>
+  </div>
+
+</div>
+
+<!-- ENDURANCE -->
+<div id="endurance" class="view" style="display:none">
+  <h2>Endurance Eating — Tiers (In Progress)</h2>
+
+  <div class="tier-board">
+
+    <!-- Tier 1 -->
+    <div class="tier t1">
+      <div class="tier-header">Tier 1</div>
+      <div class="tier-body">
+        <div class="player">
+          <div class="avatar" style="background-image:url('glenn.jpg');"></div>
+          <div class="pname">glon</div>
+          <div class="ppoints">LT1</div>
+        </div>
+
+        <div class="player">
+          <div class="avatar" style="background-image:url('atche.png');"></div>
+          <div class="pname">Atche</div>
+          <div class="ppoints">HT1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 2 -->
+    <div class="tier t2">
+      <div class="tier-header">Tier 2</div>
+      <div class="tier-body">
+        <div class="player">
+          <div class="avatar" style="background-image:url('seb.png');"></div>
+          <div class="pname">Seb</div>
+          <div class="ppoints">LT2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier t3">
+      <div class="tier-header">Tier 3</div>
+      <div class="tier-body">
+        <div class="no-data">No players</div>
+      </div>
+    </div>
+
+    <div class="tier t4">
+      <div class="tier-header">Tier 4</div>
+      <div class="tier-body">
+        <div class="no-data">No players</div>
+      </div>
+    </div>
+
+    <div class="tier t5">
+      <div class="tier-header">Tier 5</div>
+      <div class="tier-body">
+        <div class="no-data">No players</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SPEED -->
+<div id="speed" class="view" style="display:none">
+  <h2>Speed Eating</h2>
+  <div class="no-data">🛠 Work in progress — no rankings yet</div>
+</div>
+
+<!-- GENEROSITY -->
+<div id="generosity" class="view" style="display:none">
+  <h2>Generosity</h2>
+  <div class="no-data">🛠 Work in progress — no rankings yet</div>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const views = document.querySelectorAll('.view');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const target = tab.dataset.view;
+      views.forEach(v => v.style.display = v.id === target ? '' : 'none');
+    });
+  });
+</script>
+
+</body>
+</html>
